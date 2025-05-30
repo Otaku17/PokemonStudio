@@ -65,6 +65,8 @@ import { registerReadRMXPEvents } from '@src/backendTasks/readRMXPEvents';
 // Setup the log renderer
 log.initialize({ preload: false });
 
+app.setPath('userData', path.join(app.getPath('appData'), 'PokemonStudioCache'));
+
 const resolvePathFn = (vars: PathVariables) => {
   return path.join(vars.libraryDefaultDir, `renderer.log`);
 };
@@ -75,9 +77,11 @@ fileTransport.resolvePathFn = resolvePathFn;
 const createWindow = async () => {
   registerElectronProtocolWhenAppRead();
 
+  const indexPath = path.join(__dirname, '../../index.html');
   const mainWindow = windowManager.createWindow({
     name: 'main',
     isMain: true,
+    file: indexPath,
   });
 
   // @TODO: Use 'ready-to-show' event

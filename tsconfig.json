@@ -28,5 +28,5 @@
       "react": ["./node_modules/@types/react"]
     }
   },
-  "include": ["src/**/*", "config/**/*", "forge.config.ts", "updater_i18n.js"]
+  "include": ["vite.config.ts", "src/**/*", "config/**/*", "forge.config.ts", "updater_i18n.js"]
 }

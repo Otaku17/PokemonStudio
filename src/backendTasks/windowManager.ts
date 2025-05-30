@@ -100,6 +100,7 @@ class WindowManager {
           window.minimize();
           break;
         case 'maximize':
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           window.isMaximized() ? window.unmaximize() : window.maximize();
           break;
         case 'restore':
@@ -223,7 +224,9 @@ class WindowManager {
       autoHideMenuBar: process.platform === 'linux',
       webPreferences: {
         contextIsolation: true,
-        preload: mainWindowPreloadWebpackEntry,
+        preload: app.isPackaged
+          ? join(__dirname, '../../preload.ts') // ou './dist/preload.js' selon ton build
+          : join(__dirname, '../preload/index.cjs'), // ou '../dist/preload.js' si tu compiles preload dans dist,
       },
     };
 
@@ -247,7 +250,11 @@ class WindowManager {
     } else if (windowOptions.file) {
       newWindow.loadFile(windowOptions.file);
     } else {
-      newWindow.loadURL(mainWindowWebpackEntry);
+      newWindow.loadURL(
+        app.isPackaged
+          ? `file://${join(__dirname, '../../index.html')}` // adapt path to your Vite output
+          : 'http://localhost:5173' // Vite dev server
+      );
     }
 
     if (options.isMain) {

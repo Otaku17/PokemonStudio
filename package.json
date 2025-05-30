@@ -38,14 +38,10 @@
     "es": true
   },
   "scripts": {
-    "i18n": "node updater_i18n",
-    "start": "node updater_i18n && run-script-os",
-    "start:win32": "chcp 65001 && electron-forge start",
-    "start:darwin:linux": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "node updater_i18n && electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "dev": "vite",
+    "build": "vite build",
+    "start": "electron .",
+    "dev:all": "concurrently \"npm run dev\" \"npm run start\""
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
@@ -68,7 +64,9 @@
     "@typescript-eslint/eslint-plugin": "^8.6.0",
     "@typescript-eslint/parser": "^8.6.0",
     "@vercel/webpack-asset-relocator-loader": "1.7.3",
+    "@vitejs/plugin-react": "^4.5.0",
     "app-builder-lib": "^25.0.5",
+    "concurrently": "^9.1.2",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
     "electron": "^32.1.1",
@@ -84,7 +82,10 @@
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "vite": "^6.3.5",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
     "@electron-forge/publisher-github": "^7.4.0",
